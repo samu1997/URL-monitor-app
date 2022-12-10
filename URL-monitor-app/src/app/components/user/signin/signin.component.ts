@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -8,18 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+  loginForm: FormGroup;
 
-  loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
-
-  constructor(private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ["", Validators.required, Validators.email],
+      password: ["", Validators.required],
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
+  onSubmit() {
     console.warn(this.loginForm.value);
   }
 
