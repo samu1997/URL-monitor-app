@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +14,7 @@ export class SigninComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,4 +23,7 @@ export class SigninComponent implements OnInit {
     console.warn(this.loginForm.value);
   }
 
+  gotoSignUp() {
+    this.router.navigateByUrl('/user/signup');
+  }
 }
